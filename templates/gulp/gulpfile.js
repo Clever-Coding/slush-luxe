@@ -13,7 +13,7 @@ gulp.task('haxe:watch', ['haxe:build'], function(done){
   done();
 })
 
-gulp.task('watch',  function(done){
+gulp.task('watch', ['haxe:build'], function(done){
   browserSync.init({
     server: {
       baseDir: './bin/web'
@@ -23,7 +23,7 @@ gulp.task('watch',  function(done){
   gulp.watch(['src/**', 'assets/**'], ['haxe:watch']);
 });
 
-gulp.task('default', ['haxe:build', 'watch']);
+gulp.task('default', ['watch']);
 
 gulp.task('deploy', ['haxe:build'], function (done) {
   gh.publish(path.join(__dirname, 'bin/web'));
